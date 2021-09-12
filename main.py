@@ -43,6 +43,22 @@ def daumAPI_webVideoSearch():
 
     print(json.dumps(videoRequest.json(), indent="\t", ensure_ascii=False))
 
+def daumAPI_wrongAPI():
+    url = "https://dapi.kakao.com/v2/search/vclip"
+    # header = {"Authorization": "KakaoAK 3c09b7658d189bd883d39ea78ad071e4"}
+    header = {}
+    method = "GET"
+    parameter = {"query": "아이유"}
+    wrongRequest = requests.request(url=url, headers=header, method=method, params=parameter)
+    print(wrongRequest)
+
+    print(json.dumps(wrongRequest.json(), indent="\t", ensure_ascii=False))
+    # < Response[401] >
+    # {
+    #     "errorType": "AccessDeniedError",
+    #     "message": "cannot find Authorization : KakaoAK header"
+    # }
+
 
 def print_hi(name):
     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
@@ -53,5 +69,5 @@ def print_hi(name):
 if __name__ == '__main__':
 #   print_hi('PyCharm')
 #    daumAPI_webDocSearch()
-    daumAPI_webVideoSearch()
-
+#    daumAPI_webVideoSearch()
+    daumAPI_wrongAPI()
