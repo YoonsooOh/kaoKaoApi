@@ -33,6 +33,15 @@ def daumAPI_webDocSearch():
     # ensure_ascii=False는 한글이 깨지지 않게 하는 옵션
     print(json.dumps(request.json(), indent="\t", ensure_ascii=False))
 
+def daumAPI_webImageSearch():
+    url = "https://dapi.kakao.com/v2/search/image"
+    header = {"Authorization": "KakaoAK 3c09b7658d189bd883d39ea78ad071e4"}
+    method = "GET"
+    parameter = {"query": "순두부 젤라또", "sort": "accuracy", "size": "15"}
+    imageRequest = requests.request(url=url, headers=header, method=method, params=parameter)
+    print(imageRequest)
+    print(json.dumps(imageRequest.json(), indent="\t", ensure_ascii=False))
+
 def daumAPI_webVideoSearch():
     url = "https://dapi.kakao.com/v2/search/vclip"
     header = {"Authorization": "KakaoAK 3c09b7658d189bd883d39ea78ad071e4"}
@@ -60,6 +69,7 @@ def daumAPI_wrongAPI():
     # }
 
 
+
 def print_hi(name):
     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
 
@@ -67,7 +77,9 @@ def print_hi(name):
 # if문의 뜻은 main 프로세스만 이 부분을 실행시키라는 뜻
 # main 프로세스 말고 보조 프로세스는 실행시키면 안됨
 if __name__ == '__main__':
-#   print_hi('PyCharm')
-#    daumAPI_webDocSearch()
-#    daumAPI_webVideoSearch()
-    daumAPI_wrongAPI()
+   print_hi('PyCharm')
+   daumAPI_webDocSearch()
+   daumAPI_webVideoSearch()
+   daumAPI_wrongAPI()
+   daumAPI_webImageSearch()
+
