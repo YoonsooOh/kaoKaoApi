@@ -42,6 +42,27 @@ def daumAPI_webImageSearch():
     print(imageRequest)
     print(json.dumps(imageRequest.json(), indent="\t", ensure_ascii=False))
 
+def jsonParsing_webImageSearch():
+    url = "https://dapi.kakao.com/v2/search/image"
+    header = {"Authorization": "KakaoAK 3c09b7658d189bd883d39ea78ad071e4"}
+    method = "GET"
+    parameter = {"query": "순두부 젤라또", "sort": "accuracy", "size": "15"}
+    imageRequest = requests.request(url=url, headers=header, method=method, params=parameter)
+    #jsonDict는 ['documents', [10개 response list]
+    jsonDict = imageRequest.json()
+
+#    print(jsonDict)
+#    print(jsonDict['documents'][0]['thumbnail_url'])
+
+    for key_largeDict, value_smallDict in jsonDict.items():
+        if(key_largeDict == "documents"):
+            for eachResponse in value_smallDict:
+                print(eachResponse["display_sitename"])
+                #print(eachResponse)
+                #print(eachResponse["thumbnail_url"])
+
+
+
 def daumAPI_webVideoSearch():
     url = "https://dapi.kakao.com/v2/search/vclip"
     header = {"Authorization": "KakaoAK 3c09b7658d189bd883d39ea78ad071e4"}
@@ -78,8 +99,8 @@ def print_hi(name):
 # main 프로세스 말고 보조 프로세스는 실행시키면 안됨
 if __name__ == '__main__':
    print_hi('PyCharm')
-   daumAPI_webDocSearch()
-   daumAPI_webVideoSearch()
-   daumAPI_wrongAPI()
-   daumAPI_webImageSearch()
-
+   #daumAPI_webDocSearch()
+   #daumAPI_webVideoSearch()
+   #daumAPI_wrongAPI()
+   #daumAPI_webImageSearch()
+   jsonParsing_webImageSearch()
